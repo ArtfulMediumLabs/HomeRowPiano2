@@ -1,6 +1,7 @@
 (function(){
 
-	// Get output feedback element
+	// Get instrument selector and feedback elements
+	var instrumentSelector = document.getElementById('instrument-selector');
 	var feedback = document.getElementById('feedback');
 
 	/**
@@ -14,13 +15,6 @@
 				console.log(state, progress);
 			},
 			onsuccess: function() {
-				// var delay = 0; // play one note every quarter second
-				// var note = 50; // the MIDI note
-				// var velocity = 127; // how hard the note hits
-				// // play the note
-				// MIDI.setVolume(0, 127);
-				// MIDI.noteOn(0, note, velocity, delay);
-				// MIDI.noteOff(0, note, delay + 0.75);
 
 				// Define piano keys
 				var c3 = new Key('#c3', 50);
@@ -31,16 +25,6 @@
 				var a3 = new Key('#a3', 59);
 				var b3 = new Key('#b3', 61);
 				var c4 = new Key('#c4', 62);
-
-				// Initialize piano keys
-				c3.init();
-				d3.init();
-				e3.init();
-				f3.init();
-				g3.init();
-				a3.init();
-				b3.init();
-				c4.init();
 
 				// Listen for key presses and determine which note to play
 				window.addEventListener('keypress', function(e) {
@@ -111,7 +95,7 @@
 				var sax = new Instrument('alto_sax');
 
 				// Listen for instrument change
-				document.getElementById('instrument-selector').addEventListener('change', function(e) {
+				instrumentSelector.addEventListener('change', function(e) {
 					var selectedInstrument = this.options[this.selectedIndex].text;
 					console.log(selectedInstrument);
 					switch(selectedInstrument) {
@@ -137,9 +121,6 @@
 			this.velocity = 127;
 			this.delay = 0; 
 			this.bodyEl = document.querySelector(this.bodyID);
-		}
-		init() {
-			//console.log(this.bodyEl);
 		}
 		// Method to play pressed key's note through MIDI.js player
 		play() {
@@ -186,6 +167,8 @@
 				onsuccess: function() {
 					// Change the midi program
 					MIDI.programChange(0, MIDI.GM.byName[instrumentName].number);
+					// Unfocus the dropdown selector
+					instrumentSelector.blur();
 					// Give the user some feedback
 					feedback.innerHTML = 'Loaded: ' + instrumentName;
 					// Clear the feedback area
