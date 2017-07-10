@@ -115,19 +115,26 @@
 			this.note = note;
 			this.velocity = 127;
 			this.delay = 0; 
+			this.bodyEl = document.querySelector(this.bodyID);
 		}
 		init() {
-			this.bodyEl = document.querySelector(this.bodyID);
 			//console.log(this.bodyEl);
-			//document.addEventListener('keypress', this.play(event), true);
 		}
 		play() {
 			console.log('pressed');
 			MIDI.noteOn(0, this.note, this.velocity, this.delay);
+			this.renderOn();
 		}
 		release() {
 			console.log('released');
 			MIDI.noteOff(0, this.note, this.delay);
+			this.renderOff();
+		}
+		renderOn() {
+			jQuery(this.bodyID).addClass('pressed');
+		}
+		renderOff() {
+			jQuery(this.bodyID).removeClass('pressed');
 		}
 	}
 
