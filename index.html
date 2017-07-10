@@ -44,15 +44,31 @@
 
 <!-- HTML -->
 <div class="container">
+	<h1 class="text-center">Home Row Piano</h1>
 	<div class="row">
-		<div id="c3" class="piano-key-white"></div>
-		<div id="d3" class="piano-key-white"></div>
-		<div id="e3" class="piano-key-white"></div>
-		<div id="f3" class="piano-key-white"></div>
-		<div id="g3" class="piano-key-white"></div>
-		<div id="a3" class="piano-key-white"></div>
-		<div id="b3" class="piano-key-white"></div>
-		<div id="c4" class="piano-key-white"></div>
+		<h2>Select an Instrument</h2>
+		<div class="form-group">
+		  <select class="form-control" id="instrument-selector">
+		    <option value="piano">Piano</option>
+		    <option vlaue="sax">Alto Sax</option>
+		  </select>
+		</div>
+	</div><!-- .row -->
+	<!-- Piano keys -->
+	<div class="row">
+		<div id="c3" class="piano-key-white"><span>A</span></div>
+		<div id="d3" class="piano-key-white"><span>S</span></div>
+		<div id="e3" class="piano-key-white"><span>D</span></div>
+		<div id="f3" class="piano-key-white"><span>F</span></div>
+		<div id="g3" class="piano-key-white"><span>J</span></div>
+		<div id="a3" class="piano-key-white"><span>K</span></div>
+		<div id="b3" class="piano-key-white"><span>L</span></div>
+		<div id="c4" class="piano-key-white"><span>;</span></div>
+	</div><!-- .row -->
+	<br/><br/>
+	<!-- User feedback area -->
+	<div class="row">
+		<div id="feedback"></div>
 	</div><!-- .row -->
 </div><!-- .container -->
 

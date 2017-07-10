@@ -1,15 +1,22 @@
 /* Styles */
 
 .piano-key-white {
+	position: relative;
 	width: 10%;
-	height: 50px;
+	height: 100px;
+	font-size: 16px;
 	margin-left: 1.25%;
 	margin-right: 1.25%;
 	margin-top: 50px;
 	float: left;
 	background: #ccc;
 }
-
+.piano-key-white span {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translateX(-50%) translateY(-50%);
+}
 .piano-key-white.pressed {
 	background: #00bcd4;
 }
