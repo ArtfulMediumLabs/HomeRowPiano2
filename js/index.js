@@ -93,6 +93,7 @@
 				// Built instuments
 				var piano = new Instrument('acoustic_grand_piano');
 				var sax = new Instrument('alto_sax');
+				var viola = new Instrument('viola');
 
 				// Listen for instrument change
 				instrumentSelector.addEventListener('change', function(e) {
@@ -104,6 +105,9 @@
 							break;
 						case 'Alto Sax':
 							sax.load();
+							break;
+						case 'Viola':
+							viola.load();
 							break;
 					}
 				});
