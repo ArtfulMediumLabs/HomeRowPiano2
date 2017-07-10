@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Home Row Piano</title>
+	<meta name="description" content="Sandbox">
+	<meta name="author" content="Jim Kulakowski">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- Import Bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<!-- Import FontAwesome css -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Angular JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<!-- MidiJS -->
+	<!-- polyfill -->
+	<script src="./includes/MIDI-js/inc/shim/Base64.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/inc/shim/Base64binary.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/inc/shim/WebAudioAPI.js" type="text/javascript"></script>
+	<!-- midi.js package -->
+	<script src="./includes/MIDI-js/js/midi/audioDetect.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/midi/gm.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/midi/loader.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/midi/plugin.audiotag.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/midi/plugin.webaudio.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/midi/plugin.webmidi.js" type="text/javascript"></script>
+	<!-- utils -->
+	<script src="./includes/MIDI-js/js/util/dom_request_xhr.js" type="text/javascript"></script>
+	<script src="./includes/MIDI-js/js/util/dom_request_script.js" type="text/javascript"></script>
+
+	<!-- custom styles -->
+	<link rel="stylesheet" href="css/style.css?v=1.0">
+
+</head>
+
+<!-- HTML -->
+<div class="container">
+	<div class="row">
+		<div id="c3" class="white-piano-key"></div>
+		<div id="d3" class="white-piano-key"></div>
+		<div id="e3" class="white-piano-key"></div>
+		<div id="f3" class="white-piano-key"></div>
+		<div id="g3" class="white-piano-key"></div>
+		<div id="a3" class="white-piano-key"></div>
+		<div id="b3" class="white-piano-key"></div>
+		<div id="c4" class="white-piano-key"></div>
+	</div><!-- .row -->
+</div><!-- .container -->
+
+<!-- END HTML -->
+
+
+<!-- Import jQuery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<!-- Import Bootstrap Javascript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Custom Javascript -->
+<script type="text/javascript" src="js/index.js"></script>
