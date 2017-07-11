@@ -24,14 +24,14 @@
 				pianoLoader.stop(); // Hide loader
 
 				// Define piano keys
-				var c3 = new Key('#c3', 50);
-				var d3 = new Key('#d3', 52);
-				var e3 = new Key('#e3', 54);
-				var f3 = new Key('#f3', 55);
-				var g3 = new Key('#g3', 57);
-				var a3 = new Key('#a3', 59);
-				var b3 = new Key('#b3', 61);
-				var c4 = new Key('#c4', 62);
+				var c3 = new Key('#c3', 48);
+				var d3 = new Key('#d3', 50);
+				var e3 = new Key('#e3', 52);
+				var f3 = new Key('#f3', 53);
+				var g3 = new Key('#g3', 55);
+				var a3 = new Key('#a3', 57);
+				var b3 = new Key('#b3', 59);
+				var c4 = new Key('#c4', 60);
 
 				// Listen for key presses and determine which note to play
 				window.addEventListener('keydown', function(e) {
