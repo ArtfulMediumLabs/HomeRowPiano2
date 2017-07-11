@@ -28,13 +28,13 @@ require 'midilib'
 require 'zlib'
 include FileUtils
 
-BUILD_DIR = "./includes/soundfont" # Output path
-SOUNDFONT = "./includes/soundfont/HS_Strings.SF2" # Soundfont file path
+BUILD_DIR = "/includes/soundfont" # Output path
+SOUNDFONT = "/includes/soundfont/Rhodes EP-JN1.1.sf2" # Soundfont file path
 
 # This script will generate MIDI.js-compatible instrument JS files for
 # all instruments in the below array. Add or remove as necessary.
 INSTRUMENTS = [
-  0     # HS Strings
+  90     # Rhodes
 ];
 # INSTRUMENTS = [
 #   0,     # Acoustic Grand Piano

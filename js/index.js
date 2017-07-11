@@ -27,32 +27,32 @@
 				var c4 = new Key('#c4', 62);
 
 				// Listen for key presses and determine which note to play
-				window.addEventListener('keypress', function(e) {
+				window.addEventListener('keydown', function(e) {
 					var key = e.keyCode;
-					//console.log(key);
+					console.log(key);
 					switch(key) {
-						case 97:
+						case 65:
 							c3.play();
 							break;
-						case 115:
+						case 83:
 							d3.play();
 							break;
-						case 100:
+						case 68:
 							e3.play();
 							break;
-						case 102:
+						case 70:
 							f3.play();
 							break;
-						case 106:
+						case 74:
 							g3.play();
 							break;
-						case 107:
+						case 75:
 							a3.play();
 							break;
-						case 108:
+						case 76:
 							b3.play();
 							break;
-						case 59:
+						case 186:
 							c4.play();
 							break;
 					}
@@ -125,16 +125,21 @@
 			this.velocity = 127;
 			this.delay = 0; 
 			this.bodyEl = document.querySelector(this.bodyID);
+			this.active = false; // Bool to track whether key is down
 		}
 		// Method to play pressed key's note through MIDI.js player
 		play() {
 			//console.log('pressed');
-			MIDI.noteOn(0, this.note, this.velocity, this.delay);
-			this.renderOn();
+			if(!this.active) {
+				this.active = true;
+				MIDI.noteOn(0, this.note, this.velocity, this.delay);
+				this.renderOn();
+			}
 		}
 		// Method to stop pressed key's note through MIDI.js player
 		release() {
 			//console.log('released');
+			this.active = false;
 			MIDI.noteOff(0, this.note, this.delay);
 			this.renderOff();
 		}
