@@ -8,6 +8,11 @@
 	 * Load initial soundfont with MIDI.js
 	 */
 	window.onload = function () {
+		// Instantiate a new loader
+		var pianoLoader = new Loader('.loading-container');
+		pianoLoader.init();
+
+		// Load the default MIDI.js instrument
 		MIDI.loadPlugin({
 			soundfontUrl: "./includes/soundfont/",
 			instrument: "acoustic_grand_piano",
@@ -15,6 +20,8 @@
 				console.log(state, progress);
 			},
 			onsuccess: function() {
+
+				pianoLoader.stop(); // Hide loader
 
 				// Define piano keys
 				var c3 = new Key('#c3', 50);
@@ -29,7 +36,7 @@
 				// Listen for key presses and determine which note to play
 				window.addEventListener('keydown', function(e) {
 					var key = e.keyCode;
-					console.log(key);
+					//console.log(key);
 					switch(key) {
 						case 65:
 							c3.play();
@@ -97,6 +104,7 @@
 
 				// Listen for instrument change
 				instrumentSelector.addEventListener('change', function(e) {
+					pianoLoader.start(); // Show loader
 					var selectedInstrument = this.options[this.selectedIndex].text;
 					console.log(selectedInstrument);
 					switch(selectedInstrument) {
@@ -110,6 +118,7 @@
 							viola.load();
 							break;
 					}
+					pianoLoader.stop();
 				});
 			}
 		});
@@ -161,8 +170,6 @@
 			this.name = name;
 		}
 		load() {
-			// Let the user know the instrument is loading
-			feedback.innerHTML = 'Loading...';
 			// Grab this instrument object's name
 			var instrumentName = this.name;
 			// Load MIDI.js with soundfont associated with this 
@@ -178,14 +185,35 @@
 					MIDI.programChange(0, MIDI.GM.byName[instrumentName].number);
 					// Unfocus the dropdown selector
 					instrumentSelector.blur();
-					// Give the user some feedback
-					feedback.innerHTML = 'Loaded: ' + instrumentName;
-					// Clear the feedback area
-					window.setTimeout(function() {
-						feedback.innerHTML = '';
-					}, 1000);
 				}
 			});		
+		}
+	}
+
+	/**
+	 * Define class to manage loading icons
+	 */
+	class Loader {
+		constructor(bodyID) {
+			this.bodyID = bodyID;
+			this.active = false;
+		}
+		init() {
+			if(this.active === true) {
+				jQuery(this.bodyID).addClass('active');
+			} else {
+				jQuery(this.bodyID).removeClass('active');
+			}
+		}
+		start() {
+			this.active = true;
+			jQuery(this.bodyID).fadeIn(300);
+			this.init();
+		}
+		stop() {
+			this.active = false;
+			jQuery(this.bodyID).fadeOut(300);
+			this.init();
 		}
 	}
 

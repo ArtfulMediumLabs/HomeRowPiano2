@@ -1,5 +1,8 @@
-/* Styles */
+/**
+ * Stylesheet
+ */
 
+/* Piano keys */
 .piano-key-white {
 	position: relative;
 	width: 10%;
@@ -16,9 +19,39 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
 	transform: translateX(-50%) translateY(-50%);
 }
 .piano-key-white.pressed {
 	color: #fff;
 	background: #00bcd4;
+}
+
+/* Loading Icon */
+.loading-container .overlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+.loader {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -25px; /* absolutely center icon */
+	margin-top: -25px;
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid #00bcd4; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
