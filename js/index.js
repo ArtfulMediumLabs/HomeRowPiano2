@@ -104,21 +104,19 @@
 
 				// Listen for instrument change
 				instrumentSelector.addEventListener('change', function(e) {
-					pianoLoader.start(); // Show loader
 					var selectedInstrument = this.options[this.selectedIndex].text;
 					console.log(selectedInstrument);
 					switch(selectedInstrument) {
 						case 'Piano':
-							piano.load();
+							piano.load(pianoLoader);
 							break;
 						case 'Alto Sax':
-							sax.load();
+							sax.load(pianoLoader);
 							break;
 						case 'Viola':
-							viola.load();
+							viola.load(pianoLoader);
 							break;
 					}
-					pianoLoader.stop();
 				});
 			}
 		});
@@ -169,7 +167,8 @@
 		constructor(name) {
 			this.name = name;
 		}
-		load() {
+		load(loader) {
+			loader.start();
 			// Grab this instrument object's name
 			var instrumentName = this.name;
 			// Load MIDI.js with soundfont associated with this 
@@ -185,6 +184,7 @@
 					MIDI.programChange(0, MIDI.GM.byName[instrumentName].number);
 					// Unfocus the dropdown selector
 					instrumentSelector.blur();
+					loader.stop();
 				}
 			});		
 		}
@@ -207,12 +207,12 @@
 		}
 		start() {
 			this.active = true;
-			jQuery(this.bodyID).fadeIn(300);
+			jQuery(this.bodyID).fadeIn(200);
 			this.init();
 		}
 		stop() {
 			this.active = false;
-			jQuery(this.bodyID).fadeOut(300);
+			jQuery(this.bodyID).fadeOut(200);
 			this.init();
 		}
 	}
