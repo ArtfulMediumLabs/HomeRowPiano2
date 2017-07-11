@@ -101,6 +101,7 @@
 				var piano = new Instrument('acoustic_grand_piano');
 				var sax = new Instrument('alto_sax');
 				var viola = new Instrument('viola');
+				var uipiano = new Instrument('electric_grand_piano');
 
 				// Listen for instrument change
 				instrumentSelector.addEventListener('change', function(e) {
@@ -115,6 +116,9 @@
 							break;
 						case 'Viola':
 							viola.load(pianoLoader);
+							break;
+						case 'UIPiano':
+							uipiano.load(pianoLoader);
 							break;
 					}
 				});
