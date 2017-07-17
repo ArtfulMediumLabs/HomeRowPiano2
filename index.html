@@ -32,28 +32,40 @@
 	<!-- Youtube Video Embed -->
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-		<div class="video-wrapper">
-		    <!-- Copy & Pasted from YouTube -->
-		    <iframe width="560" height="349" src="http://www.youtube.com/embed/ptP31_LYVLg?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
-		</div>
+			<div class="video-wrapper">
+			    <!-- Copy & Pasted from YouTube -->
+			    <iframe id="yt-player" width="560" height="349" src="http://www.youtube.com/embed/ptP31_LYVLg?rel=0&hd=1" frameborder="0" allowfullscreen></iframe>
+			</div>
 		</div><!-- .col -->
 	</div><!-- .row -->
 	<!-- Piano keys -->
 	<div class="row">
-		<div id="c2" class="piano-key-white"><span>Q</span></div>
-		<div id="d2" class="piano-key-white"><span>W</span></div>
-		<div id="eb2" class="piano-key-black"><span>A</span></div>
-		<div id="e2" class="piano-key-white"><span>S</span></div>
-		<div id="f2" class="piano-key-white"><span>D</span></div>
-		<div id="g2" class="piano-key-white"><span>F</span></div>
-		<div id="a2" class="piano-key-white"><span>G</span></div>
-		<div id="bb2" class="piano-key-black"><span>H</span></div>
-		<div id="b2" class="piano-key-white"><span>J</span></div>
-		<div id="c3" class="piano-key-white"><span>K</span></div>
-		<div id="d3" class="piano-key-white"><span>L</span></div>
-		<div id="eb3" class="piano-key-black"><span>;</span></div>
-		<div id="e3" class="piano-key-white"><span>[</span></div>
-		<div id="f3" class="piano-key-white"><span>]</span></div>
+		<div class="piano-container">
+			<div id="c2" class="piano-key-white pull-up"><span>Q</span></div>
+			<div id="d2" class="piano-key-white pull-up"><span>W</span></div>
+			<div id="eb2" class="piano-key-black"><span>A</span></div>
+			<div id="e2" class="piano-key-white"><span>S</span></div>
+			<div id="f2" class="piano-key-white"><span>D</span></div>
+			<div id="g2" class="piano-key-white"><span>F</span></div>
+			<div id="a2" class="piano-key-white"><span>G</span></div>
+			<div id="bb2" class="piano-key-black"><span>H</span></div>
+			<div id="b2" class="piano-key-white"><span>J</span></div>
+			<div id="c3" class="piano-key-white"><span>K</span></div>
+			<div id="d3" class="piano-key-white"><span>L</span></div>
+			<div id="eb3" class="piano-key-black"><span>;</span></div>
+			<div id="e3" class="piano-key-white pull-up"><span>[</span></div>
+			<div id="f3" class="piano-key-white pull-up"><span>]</span></div>
+		</div>
+	</div><!-- .row -->
+	<div class="row">
+		<div class="note-container">
+			<!-- filled dynmaically in main() -->
+		</div>
+	</div><!-- .row -->
+	<!-- Scale Notes -->
+	<div class="row">
+		<div class="scale">
+		</div>
 	</div><!-- .row -->
 	<br/><br/>
 	<!-- User feedback area -->
@@ -65,6 +77,8 @@
 		<div class="overlay"></div>
 		<div class="loader"></div>
 	</div>
+	<!-- Button (used to grab focus back from Youtube video) -->
+	<button id="btn" style="opacity: 0"></button>
 </div><!-- .container -->
 
 <!-- END HTML -->
