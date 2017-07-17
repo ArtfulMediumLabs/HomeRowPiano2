@@ -1,128 +1,6 @@
 (function(){
 
 	/**
-	 * Load initial soundfont with MIDI.js
-	 */
-	// window.onload = function () {
-	// 	// Instantiate a new loader
-	// 	var pianoLoader = new Loader('.loading-container');
-	// 	pianoLoader.init();
-
-	// 	// Load the default MIDI.js instrument
-	// 	MIDI.loadPlugin({
-	// 		soundfontUrl: "./includes/soundfont/",
-	// 		instrument: "acoustic_grand_piano",
-	// 		onprogress: function(state, progress) {
-	// 			console.log(state, progress);
-	// 		},
-	// 		onsuccess: function() {
-
-	// 			pianoLoader.stop(); // Hide loader
-
-	// 			// Define piano keys
-	// 			var c3 = new Key('#c3', 48);
-	// 			var d3 = new Key('#d3', 50);
-	// 			var e3 = new Key('#e3', 52);
-	// 			var f3 = new Key('#f3', 53);
-	// 			var g3 = new Key('#g3', 55);
-	// 			var a3 = new Key('#a3', 57);
-	// 			var b3 = new Key('#b3', 59);
-	// 			var c4 = new Key('#c4', 60);
-
-	// 			// Listen for key presses and determine which note to play
-	// 			window.addEventListener('keydown', function(e) {
-	// 				var key = e.keyCode;
-	// 				//console.log(key);
-	// 				switch(key) {
-	// 					case 65:
-	// 						c3.play();
-	// 						break;
-	// 					case 83:
-	// 						d3.play();
-	// 						break;
-	// 					case 68:
-	// 						e3.play();
-	// 						break;
-	// 					case 70:
-	// 						f3.play();
-	// 						break;
-	// 					case 74:
-	// 						g3.play();
-	// 						break;
-	// 					case 75:
-	// 						a3.play();
-	// 						break;
-	// 					case 76:
-	// 						b3.play();
-	// 						break;
-	// 					case 186:
-	// 						c4.play();
-	// 						break;
-	// 				}
-	// 			});
-
-	// 			// Listen for key releases and determine which note to stop
-	// 			window.addEventListener('keyup', function(e) {
-	// 				var key = e.keyCode;
-	// 				//console.log(key);
-	// 				switch(key) {
-	// 					case 65:
-	// 						c3.release();
-	// 						break;
-	// 					case 83:
-	// 						d3.release();
-	// 						break;
-	// 					case 68:
-	// 						e3.release();
-	// 						break;
-	// 					case 70:
-	// 						f3.release();
-	// 						break;
-	// 					case 74:
-	// 						g3.release();
-	// 						break;
-	// 					case 75:
-	// 						a3.release();
-	// 						break;
-	// 					case 76:
-	// 						b3.release();
-	// 						break;
-	// 					case 186:
-	// 						c4.release();
-	// 						break;
-	// 				}
-	// 			});
-
-	// 			// Build instuments
-	// 			var piano = new Instrument('acoustic_grand_piano');
-	// 			var sax = new Instrument('alto_sax');
-	// 			var viola = new Instrument('viola');
-	// 			var uipiano = new Instrument('electric_grand_piano');
-
-	// 			// Listen for instrument change
-	// 			instrumentSelector.addEventListener('change', function(e) {
-	// 				var selectedInstrument = this.options[this.selectedIndex].text;
-	// 				console.log(selectedInstrument);
-	// 				switch(selectedInstrument) {
-	// 					case 'Piano':
-	// 						piano.load(pianoLoader);
-	// 						break;
-	// 					case 'Alto Sax':
-	// 						sax.load(pianoLoader);
-	// 						break;
-	// 					case 'Viola':
-	// 						viola.load(pianoLoader);
-	// 						break;
-	// 					case 'UIPiano':
-	// 						uipiano.load(pianoLoader);
-	// 						break;
-	// 				}
-	// 			});
-	// 		}
-	// 	});
-	// };
-
-	/**
 	 * Definitions
 	 *-----------------------------------------------------------------*/
 
@@ -130,29 +8,36 @@
 	 * Define piano key class
 	 */
 	class Key {
-		constructor(bodyID, note) {
+		constructor(bodyID, note, audioFile) {
 			this.bodyID = bodyID;
 			this.note = note;
-			this.velocity = 127;
-			this.delay = 0; 
+			this.audioFile = audioFile;
 			this.bodyEl = document.querySelector(this.bodyID);
 			this.active = false; // Bool to track whether key is down
 		}
+		build(loader) {
+			loader.start(); // show loading icon
+			var keyNote = this.note;
+		 	this.Player = new Tone.Sampler(this.audioFile, function() {
+				console.log(keyNote + ' ready');
+				loader.stop(); // hide loading icon
+			}).toMaster();			
+		}
 		// Method to play pressed key's note through MIDI.js player
-		play(instrument) {
+		play() {
 			//console.log(this.note);
 			//console.log('pressed');
 			if(!this.active) {
 				this.active = true;
-				instrument.triggerAttack(this.note);
+				this.Player.triggerAttack();
 				this.renderOn();
 			}
 		}
 		// Method to stop pressed key's note through MIDI.js player
-		release(instrument) {
+		release() {
 			//console.log('released');
 			this.active = false;
-			instrument.triggerRelease(this.note);
+			this.Player.triggerRelease();
 			this.renderOff();
 		}
 		// Method to display that this key is being pressed
@@ -162,36 +47,6 @@
 		// Method to display that this key is no longer being pressed
 		renderOff() {
 			jQuery(this.bodyID).removeClass('pressed');
-		}
-	}
-
-	/**
-	 * Define Instrument class
-	 */
-	class Instrument {
-		constructor(name) {
-			this.name = name;
-		}
-		load(loader) {
-			//loader.start();
-			// Grab this instrument object's name
-			var instrumentName = this.name;
-			// Load MIDI.js with soundfont associated with this 
-			// instrument's name
-			// MIDI.loadPlugin({
-			// 	soundfontUrl: "./includes/soundfont/",
-			// 	instrument: instrumentName,
-			// 	onprogress: function(state, progress) {
-			// 		console.log(state, progress);
-			// 	},
-			// 	onsuccess: function() {
-			// 		// Change the midi program
-			// 		MIDI.programChange(0, MIDI.GM.byName[instrumentName].number);
-			// 		// Unfocus the dropdown selector
-			// 		instrumentSelector.blur();
-			// 		loader.stop();
-			// 	}
-			// });		
 		}
 	}
 
@@ -229,35 +84,41 @@
 	 */
 	function main() {
 
-	 	// Create a new synth instrument with Tone.js and connect to speakers
-		var synth = new Tone.PolySynth({
-			"oscillator" : {
-				"type" : "pwm",
-				"modulationFrequency" : 0.2
-			},
-			"envelope" : {
-				"attack" : 0.02,
-				"decay" : 0.1,
-				"sustain" : 0.2,
-				"release" : 0.9,
-			}
-		}).toMaster();
+		// Instantiate a new loader
+		var noteLoader = new Loader('.loading-container');
+		noteLoader.init();
 
-		// Define piano keys
-		var C3 = new Key('#c3', 'C3');
-		var D3 = new Key('#d3', 'D3');
-		var Eb3 = new Key('#eb3', 'Eb3');
-		var E3 = new Key('#e3', 'E3');
-		var F3 = new Key('#f3', 'F3');
-		var G3 = new Key('#g3', 'G3');
-		var A3 = new Key('#a3', 'A3');
-		var Bb3 = new Key('#bb3', 'Bb3');
-		var B3 = new Key('#b3', 'B3');
-		var C4 = new Key('#c4', 'C4');
-		var D4 = new Key('#d4', 'D4');
-		var Eb4 = new Key('#eb4', 'Eb4');
-		var E4 = new Key('#e4', 'E4');
-		var F4 = new Key('#f4', 'F4');
+	 	// Create new Key objects for each note
+	 	var C2 = new Key('#c2', 'C2', "audio/tenor-sax/1812__simondsouza__c2.wav");
+	 	var D2 = new Key('#d2', 'D2', "audio/tenor-sax/1815__simondsouza__d2.wav");
+	 	var Eb2 = new Key('#eb2', 'Eb2', "audio/tenor-sax/1824__simondsouza__eb2.wav");
+	 	var E2 = new Key('#e2', '', "audio/tenor-sax/1821__simondsouza__e2.wav");
+	 	var F2 = new Key('#f2', 'F2', "audio/tenor-sax/1827__simondsouza__f2.wav");
+	 	var G2 = new Key('#g2', 'G2', "audio/tenor-sax/1829__simondsouza__g2.wav");
+	 	var A2 = new Key('#a2', 'A2', "audio/tenor-sax/1801__simondsouza__a2.wav");
+	 	var Bb2 = new Key('#bb2', 'Bb2', "audio/tenor-sax/1810__simondsouza__bb2.wav");
+	 	var B2 = new Key('#b2', 'B2', "audio/tenor-sax/1807__simondsouza__b2.wav");
+	 	var C3 = new Key('#c3', 'C3', "audio/tenor-sax/1813__simondsouza__c3.wav");
+	 	var D3 = new Key('#d3', 'D3', "audio/tenor-sax/1816__simondsouza__d3.wav");
+	 	var Eb3 = new Key('#eb3', 'Eb3', "audio/tenor-sax/1825__simondsouza__eb3.wav");
+	 	var E3 = new Key('#e3', 'E3', "audio/tenor-sax/1822__simondsouza__e3.wav");
+	 	var F3 = new Key('#f3', 'F3', "audio/tenor-sax/1828__simondsouza__f3.wav");
+
+	 	// Build new Tone.js Samplers for each Key
+	 	C2.build(noteLoader);
+	 	D2.build(noteLoader);
+	 	Eb2.build(noteLoader);
+	 	E2.build(noteLoader);
+	 	F2.build(noteLoader);
+	 	G2.build(noteLoader);
+	 	A2.build(noteLoader);
+	 	Bb2.build(noteLoader);
+	 	B2.build(noteLoader);
+	 	C3.build(noteLoader);
+	 	D3.build(noteLoader);
+	 	Eb3.build(noteLoader);
+	 	E3.build(noteLoader);
+	 	F3.build(noteLoader);
 
 		// Listen for key presses and determine which note to play
 		window.addEventListener('keydown', function(e) {
@@ -265,46 +126,46 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					C3.play(synth);
+					C2.play();
 					break;
 				case 87:
-					D3.play(synth);
+					D2.play();
 					break;
 				case 65:
-					Eb3.play(synth);
+					Eb2.play();
 					break;
 				case 83:
-					E3.play(synth);
+					E2.play();
 					break;
 				case 68:
-					F3.play(synth);
+					F2.play();
 					break;
 				case 70:
-					G3.play(synth);
+					G2.play();
 					break;
 				case 71:
-					A3.play(synth);
+					A2.play();
 					break;
 				case 72:
-					Bb3.play(synth);
+					Bb2.play();
 					break;
 				case 74:
-					B3.play(synth);
+					B2.play();
 					break;
 				case 75:
-					C4.play(synth);
+					C3.play();
 					break;
 				case 76:
-					D4.play(synth);
+					D3.play();
 					break;
 				case 186:
-					Eb4.play(synth);
+					Eb3.play();
 					break;
 				case 219:
-					E4.play(synth);
+					E3.play();
 					break;
 				case 221:
-					F4.play(synth);
+					F3.play();
 					break;
 			}
 		});
@@ -315,52 +176,49 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					C3.release(synth);
+					C2.release();
 					break;
 				case 87:
-					D3.release(synth);
+					D2.release();
 					break;
 				case 65:
-					Eb3.release(synth);
+					Eb2.release();
 					break;
 				case 83:
-					E3.release(synth);
+					E2.release();
 					break;
 				case 68:
-					F3.release(synth);
+					F2.release();
 					break;
 				case 70:
-					G3.release(synth);
+					G2.release();
 					break;
 				case 71:
-					A3.release(synth);
+					A2.release();
 					break;
 				case 72:
-					Bb3.release(synth);
+					Bb2.release();
 					break;
 				case 74:
-					B3.release(synth);
+					B2.release();
 					break;
 				case 75:
-					C4.release(synth);
+					C3.release();
 					break;
 				case 76:
-					D4.release(synth);
+					D3.release();
 					break;
 				case 186:
-					Eb4.release(synth);
+					Eb3.release();
 					break;
 				case 219:
-					E4.release(synth);
+					E3.release();
 					break;
 				case 221:
-					F4.release(synth);
+					F3.release();
 					break;
 			}
 		});
-
-		//play a middle 'C' for the duration of an 8th note
-		//synth.triggerAttackRelease("C4", "8n");
 	}
 
 	/**
@@ -370,13 +228,6 @@
 	// Get instrument selector and feedback elements
 	var instrumentSelector = document.getElementById('instrument-selector');
 	var feedback = document.getElementById('feedback');
-
-	// Instantiate a new loader
-	var instrumentLoader = new Loader('.loading-container');
-	instrumentLoader.init();
-
-	// Hide the loading icon
-	instrumentLoader.stop();
 
 	// Run the app
 	main();
