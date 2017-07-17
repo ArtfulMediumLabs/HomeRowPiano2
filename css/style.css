@@ -15,6 +15,9 @@
 	margin-top: 50px;
 	float: left;
 	background: #ccc;
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
 }
 .piano-key-white span,
 .piano-key-black span {
