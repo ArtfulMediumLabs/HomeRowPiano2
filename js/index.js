@@ -12,7 +12,9 @@
 			this.bodyID = bodyID;
 			this.note = note;
 			this.audioFile = audioFile;
-			this.bodyEl = document.querySelector(this.bodyID);
+			if(bodyID) {
+				this.bodyEl = document.querySelector(this.bodyID);
+			}
 			this.active = false; // Bool to track whether key is down
 		}
 		init(keyArray) {
@@ -35,7 +37,7 @@
 			//console.log('pressed');
 			if(!this.active) {
 				this.active = true;
-				this.Player.triggerAttack(-2); // -2 transpose down to Bb
+				this.Player.triggerAttack();
 				this.renderOn();
 			}
 		}
@@ -106,80 +108,72 @@
 		noteLoader.init();
 
 	 	// Create new Key objects for each note
-	 	var C2 = new Key('#c2', 'C', "audio/tenor-sax/1812__simondsouza__c2.wav");
-	 	var D2 = new Key('#d2', 'D', "audio/tenor-sax/1815__simondsouza__d2.wav");
-	 	var Eb2 = new Key('#eb2', 'Eb', "audio/tenor-sax/1824__simondsouza__eb2.wav");
-	 	var E2 = new Key('#e2', 'E', "audio/tenor-sax/1821__simondsouza__e2.wav");
-	 	var F2 = new Key('#f2', 'F', "audio/tenor-sax/1827__simondsouza__f2.wav");
-	 	var G2 = new Key('#g2', 'G', "audio/tenor-sax/1829__simondsouza__g2.wav");
-	 	var A2 = new Key('#a2', 'A', "audio/tenor-sax/1801__simondsouza__a2.wav");
-	 	var Bb2 = new Key('#bb2', 'Bb', "audio/tenor-sax/1810__simondsouza__bb2.wav");
-	 	var B2 = new Key('#b2', 'B', "audio/tenor-sax/1807__simondsouza__b2.wav");
-	 	var C3 = new Key('#c3', 'C', "audio/tenor-sax/1813__simondsouza__c3.wav");
-	 	var D3 = new Key('#d3', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
-	 	var Eb3 = new Key('#eb3', 'Eb', "audio/tenor-sax/1825__simondsouza__eb3.wav");
-	 	var E3 = new Key('#e3', 'E', "audio/tenor-sax/1822__simondsouza__e3.wav");
-	 	var F3 = new Key('#f3', 'F', "audio/tenor-sax/1828__simondsouza__f3.wav");
-
-	 	// Build new Tone.js Samplers for each Key
-	 	C2.build(noteLoader);
-	 	D2.build(noteLoader);
-	 	Eb2.build(noteLoader);
-	 	E2.build(noteLoader);
-	 	F2.build(noteLoader);
-	 	G2.build(noteLoader);
-	 	A2.build(noteLoader);
-	 	Bb2.build(noteLoader);
-	 	B2.build(noteLoader);
-	 	C3.build(noteLoader);
-	 	D3.build(noteLoader);
-	 	Eb3.build(noteLoader);
-	 	E3.build(noteLoader);
-	 	F3.build(noteLoader);
-
-	 	// Set volume for each note
-	 	var relativeVolume = -10;
-	 	C2.Player.volume.value = relativeVolume;
-	 	D2.Player.volume.value = relativeVolume;
-	 	Eb2.Player.volume.value = relativeVolume;
-	 	E2.Player.volume.value = relativeVolume;
-	 	F2.Player.volume.value = relativeVolume;
-	 	G2.Player.volume.value = relativeVolume;
-	 	A2.Player.volume.value = relativeVolume;
-	 	Bb2.Player.volume.value = relativeVolume;
-	 	B2.Player.volume.value = relativeVolume;
-	 	C3.Player.volume.value = relativeVolume;
-	 	D3.Player.volume.value = relativeVolume;
-	 	Eb3.Player.volume.value = relativeVolume;
-	 	E3.Player.volume.value = relativeVolume;
-	 	F3.Player.volume.value = relativeVolume;
+	 	var Bb1 = new Key('#note1', 'Bb', "audio/tenor-sax/1809__simondsouza__bb1.wav");
+	 	var B1 = new Key('', 'B', "audio/tenor-sax/1806__simondsouza__b1.wav");
+	 	var C2 = new Key('#note2', 'C', "audio/tenor-sax/1812__simondsouza__c2.wav");
+	 	var Db2 = new Key('#note3', 'Db', "audio/tenor-sax/1818__simondsouza__db2.wav");
+	 	var D2 = new Key('#note4', 'D', "audio/tenor-sax/1815__simondsouza__d2.wav");
+	 	var Eb2 = new Key('#note5', 'Eb', "audio/tenor-sax/1824__simondsouza__eb2.wav");
+	 	var E2 = new Key('', 'E', "audio/tenor-sax/1821__simondsouza__e2.wav");
+	 	var F2 = new Key('#note6', 'F', "audio/tenor-sax/1827__simondsouza__f2.wav");
+	 	var Gb2 = new Key('', 'Gb', "audio/tenor-sax/1831__simondsouza__gb2.wav");
+	 	var G2 = new Key('#note7', 'G', "audio/tenor-sax/1829__simondsouza__g2.wav");
+	 	var Ab2 = new Key('#note8', 'Ab', "audio/tenor-sax/1804__simondsouza__ab2.wav");
+	 	var A2 = new Key('#note9', 'A', "audio/tenor-sax/1801__simondsouza__a2.wav");
+	 	var Bb2 = new Key('#note10', 'Bb', "audio/tenor-sax/1810__simondsouza__bb2.wav");
+	 	var B2 = new Key('', 'B', "audio/tenor-sax/1807__simondsouza__b2.wav");
+	 	var C3 = new Key('#note11', 'C', "audio/tenor-sax/1813__simondsouza__c3.wav");
+	 	var Db3 = new Key('#note12', 'Db', "audio/tenor-sax/1819__simondsouza__db3.wav");
+	 	var D3 = new Key('#note13', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
+	 	var Eb3 = new Key('#note14', 'Eb', "audio/tenor-sax/1825__simondsouza__eb3.wav");
+	 	var E3 = new Key('', 'E', "audio/tenor-sax/1822__simondsouza__e3.wav");
+	 	var F3 = new Key('', 'F', "audio/tenor-sax/1828__simondsouza__f3.wav");
 
 	 	// Initialize an array to store Key objects
 	 	var keyObjects = [];
 
 	 	// Push each Key Object into the array
-		C2.init(keyObjects);
+	 	Bb1.init(keyObjects);
+	 	C2.init(keyObjects);
+	 	Db2.init(keyObjects);
 	 	D2.init(keyObjects);
 	 	Eb2.init(keyObjects);
 	 	E2.init(keyObjects);
 	 	F2.init(keyObjects);
+	 	Gb2.init(keyObjects);
 	 	G2.init(keyObjects);
+	 	Ab2.init(keyObjects);
 	 	A2.init(keyObjects);
 	 	Bb2.init(keyObjects);
 	 	B2.init(keyObjects);
 	 	C3.init(keyObjects);
+	 	Db3.init(keyObjects);
 	 	D3.init(keyObjects);
 	 	Eb3.init(keyObjects);
 	 	E3.init(keyObjects);
 	 	F3.init(keyObjects);
 
+	 	// Build new Tone.js Samplers for each Key
+	 	for(var i = 0; i < keyObjects.length; i++) {
+	 		keyObjects[i].build(noteLoader);
+	 	}
+
+	 	// Set volume for each note
+	 	var relativeVolume = -10;
+	 	for(var i = 0; i < keyObjects.length; i++) {
+	 		keyObjects[i].Player.volume.value = relativeVolume;
+	 	}
+
 		// Output note name for each Key object
 		var keyContainer = document.querySelector('.note-container');
 		for(var i = 0; i < keyObjects.length; i++) {
-			var noteDiv = document.createElement('div');
-			noteDiv.setAttribute('class', 'note text-center');
-			noteDiv.innerHTML = '<span>' + keyObjects[i].note + '</span>';
-			keyContainer.appendChild(noteDiv);
+			// Only output a note name for Keys that have assigned DOM elements
+			if(keyObjects[i].bodyID.length) {
+				var noteDiv = document.createElement('div');
+				noteDiv.setAttribute('class', 'note text-center');
+				noteDiv.innerHTML = '<span>' + keyObjects[i].note + '</span>';
+				keyContainer.appendChild(noteDiv);
+			}
 		}
 
 		// Listen for key presses and determine which note to play
@@ -188,46 +182,46 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					C2.play();
+					Bb1.play();
 					break;
 				case 87:
-					D2.play();
+					C2.play();
 					break;
 				case 65:
-					Eb2.play();
+					Db2.play();
 					break;
 				case 83:
-					E2.play();
+					D2.play();
 					break;
 				case 68:
-					F2.play();
+					Eb2.play();
 					break;
 				case 70:
-					G2.play();
+					F2.play();
 					break;
 				case 71:
-					A2.play();
+					G2.play();
 					break;
 				case 72:
-					Bb2.play();
+					Ab2.play();
 					break;
 				case 74:
-					B2.play();
+					A2.play();
 					break;
 				case 75:
-					C3.play();
+					Bb2.play();
 					break;
 				case 76:
-					D3.play();
+					C3.play();
 					break;
 				case 186:
-					Eb3.play();
+					Db3.play();
 					break;
 				case 219:
-					E3.play();
+					D3.play();
 					break;
 				case 221:
-					F3.play();
+					Eb3.play();
 					break;
 			}
 		});
@@ -238,46 +232,46 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					C2.release();
+					Bb1.release();
 					break;
 				case 87:
-					D2.release();
+					C2.release();
 					break;
 				case 65:
-					Eb2.release();
+					Db2.release();
 					break;
 				case 83:
-					E2.release();
+					D2.release();
 					break;
 				case 68:
-					F2.release();
+					Eb2.release();
 					break;
 				case 70:
-					G2.release();
+					F2.release();
 					break;
 				case 71:
-					A2.release();
+					G2.release();
 					break;
 				case 72:
-					Bb2.release();
+					Ab2.release();
 					break;
 				case 74:
-					B2.release();
+					A2.release();
 					break;
 				case 75:
-					C3.release();
+					Bb2.release();
 					break;
 				case 76:
-					D3.release();
+					C3.release();
 					break;
 				case 186:
-					Eb3.release();
+					Db3.release();
 					break;
 				case 219:
-					E3.release();
+					D3.release();
 					break;
 				case 221:
-					F3.release();
+					Eb3.release();
 					break;
 			}
 		});
