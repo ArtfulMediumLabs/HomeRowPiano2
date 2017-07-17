@@ -29,7 +29,7 @@
 			//console.log('pressed');
 			if(!this.active) {
 				this.active = true;
-				this.Player.triggerAttack();
+				this.Player.triggerAttack(-2); // -2 transpose down to Bb
 				this.renderOn();
 			}
 		}
