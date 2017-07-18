@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>Home Row Piano 2</title>
+	<meta name="description" content="Sandbox">
+	<meta name="author" content="Jim Kulakowski">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- Import Bootstrap css -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<!-- Import FontAwesome css -->
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- Angular JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+	<!-- custom styles -->
+	<link rel="stylesheet" href="css/style.css?v=1.0">
+
+</head>
+
+<!-- HTML -->
+<div class="container">
+	<h1 class="text-center">Home Row Piano 2</h1>
+	<!-- Youtube Video Embed -->
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2 text-center">
+			<div class="spacer"></div>
+			<audio controls controlsList="nodownload">
+				<source src="audio/MarcusBluesFinal.mp3" type="audio/mpeg">
+				Your browser does not support the audio element.
+			</audio>
+			<div class="spacer"></div>
+		</div><!-- .col -->
+	</div><!-- .row -->
+	<!-- Piano keys -->
+	<div class="row">
+		<div class="piano-container">
+			<div id="note1" class="piano-key-white pull-up"><span>Q</span></div>
+			<div id="note2" class="piano-key-white pull-up"><span>W</span></div>
+			<div id="note3" class="piano-key-black"><span>A</span></div>
+			<div id="note4" class="piano-key-white"><span>S</span></div>
+			<div id="note5" class="piano-key-white"><span>D</span></div>
+			<div id="note6" class="piano-key-white"><span>F</span></div>
+			<div id="note7" class="piano-key-white"><span>G</span></div>
+			<div id="note8" class="piano-key-black"><span>H</span></div>
+			<div id="note9" class="piano-key-white"><span>J</span></div>
+			<div id="note10" class="piano-key-white"><span>K</span></div>
+			<div id="note11" class="piano-key-white"><span>L</span></div>
+			<div id="note12" class="piano-key-black"><span>;</span></div>
+			<div id="note13" class="piano-key-white pull-up"><span>[</span></div>
+			<div id="note14" class="piano-key-white pull-up"><span>]</span></div>
+		</div>
+	</div><!-- .row -->
+	<div class="row">
+		<div class="note-container">
+			<!-- filled dynmaically in main() -->
+		</div>
+	</div><!-- .row -->
+	<!-- Scale Notes -->
+	<div class="row">
+		<div class="scale">
+		</div>
+	</div><!-- .row -->
+	<br/><br/>
+	<!-- User feedback area -->
+	<div class="row">
+		<div id="feedback"></div>
+	</div><!-- .row -->
+	<!-- Animated loading icon -->
+	<div class="loading-container">
+		<div class="overlay"></div>
+		<div class="loader"></div>
+	</div>
+	<!-- Button (used to grab focus back from Youtube video) -->
+	<button id="btn" style="opacity: 0"></button>
+</div><!-- .container -->
+
+<!-- END HTML -->
+
+
+<!-- Import jQuery -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<!-- Import Bootstrap Javascript -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Tone.js -->
+<script src="includes/tone-js/build/Tone.min.js"></script>
+<!-- Custom Javascript -->
+<script type="text/javascript" src="js/index.js"></script>
