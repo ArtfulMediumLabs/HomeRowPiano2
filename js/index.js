@@ -17,12 +17,6 @@
 			}
 			this.active = false; // Bool to track whether key is down
 		}
-		init(keyArray) {
-			if(keyArray) {
-				// Add this Key object to keys array
-				keyArray.push(this);
-			}
-		}
 		build(loader) {
 			loader.start(); // show loading icon
 			var keyNote = this.note;
@@ -33,8 +27,7 @@
 		}
 		// Method to play pressed key's note through MIDI.js player
 		play() {
-			//console.log(this.note);
-			//console.log('pressed');
+			console.log('pressed');
 			if(!this.active) {
 				this.active = true;
 				this.Player.triggerAttack();
@@ -43,13 +36,14 @@
 		}
 		// Method to stop pressed key's note through MIDI.js player
 		release() {
-			//console.log('released');
+			console.log('released');
 			this.active = false;
 			this.Player.triggerRelease();
 			this.renderOff();
 		}
 		// Method to display that this key is being pressed
 		renderOn() {
+			console.log(this.bodyID);
 			jQuery(this.bodyID).addClass('pressed');
 		}
 		// Method to display that this key is no longer being pressed
@@ -108,70 +102,85 @@
 		noteLoader.init();
 
 	 	// Create new Key objects for each note
-	 	var Bb1 = new Key('#note1', 'Bb', "audio/tenor-sax/1809__simondsouza__bb1.wav");
+	 	var Bb1 = new Key('', 'Bb', "audio/tenor-sax/1809__simondsouza__bb1.wav");
 	 	var B1 = new Key('', 'B', "audio/tenor-sax/1806__simondsouza__b1.wav");
-	 	var C2 = new Key('#note2', 'C', "audio/tenor-sax/1812__simondsouza__c2.wav");
-	 	var Db2 = new Key('#note3', 'Db', "audio/tenor-sax/1818__simondsouza__db2.wav");
-	 	var D2 = new Key('#note4', 'D', "audio/tenor-sax/1815__simondsouza__d2.wav");
-	 	var Eb2 = new Key('#note5', 'Eb', "audio/tenor-sax/1824__simondsouza__eb2.wav");
+	 	var C2 = new Key('', 'C', "audio/tenor-sax/1812__simondsouza__c2.wav");
+	 	var Db2 = new Key('', 'Db', "audio/tenor-sax/1818__simondsouza__db2.wav");
+	 	var D2 = new Key('', 'D', "audio/tenor-sax/1815__simondsouza__d2.wav");
+	 	var Eb2 = new Key('', 'Eb', "audio/tenor-sax/1824__simondsouza__eb2.wav");
 	 	var E2 = new Key('', 'E', "audio/tenor-sax/1821__simondsouza__e2.wav");
-	 	var F2 = new Key('#note6', 'F', "audio/tenor-sax/1827__simondsouza__f2.wav");
+	 	var F2 = new Key('', 'F', "audio/tenor-sax/1827__simondsouza__f2.wav");
 	 	var Gb2 = new Key('', 'Gb', "audio/tenor-sax/1831__simondsouza__gb2.wav");
-	 	var G2 = new Key('#note7', 'G', "audio/tenor-sax/1829__simondsouza__g2.wav");
-	 	var Ab2 = new Key('#note8', 'Ab', "audio/tenor-sax/1804__simondsouza__ab2.wav");
-	 	var A2 = new Key('#note9', 'A', "audio/tenor-sax/1801__simondsouza__a2.wav");
-	 	var Bb2 = new Key('#note10', 'Bb', "audio/tenor-sax/1810__simondsouza__bb2.wav");
+	 	var G2 = new Key('', 'G', "audio/tenor-sax/1829__simondsouza__g2.wav");
+	 	var Ab2 = new Key('', 'Ab', "audio/tenor-sax/1804__simondsouza__ab2.wav");
+	 	var A2 = new Key('', 'A', "audio/tenor-sax/1801__simondsouza__a2.wav");
+	 	var Bb2 = new Key('', 'Bb', "audio/tenor-sax/1810__simondsouza__bb2.wav");
 	 	var B2 = new Key('', 'B', "audio/tenor-sax/1807__simondsouza__b2.wav");
-	 	var C3 = new Key('#note11', 'C', "audio/tenor-sax/1813__simondsouza__c3.wav");
-	 	var Db3 = new Key('#note12', 'Db', "audio/tenor-sax/1819__simondsouza__db3.wav");
-	 	var D3 = new Key('#note13', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
-	 	var Eb3 = new Key('#note14', 'Eb', "audio/tenor-sax/1825__simondsouza__eb3.wav");
+	 	var C3 = new Key('', 'C', "audio/tenor-sax/1813__simondsouza__c3.wav");
+	 	var Db3 = new Key('', 'Db', "audio/tenor-sax/1819__simondsouza__db3.wav");
+	 	var D3 = new Key('', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
+	 	var Eb3 = new Key('', 'Eb', "audio/tenor-sax/1825__simondsouza__eb3.wav");
 	 	var E3 = new Key('', 'E', "audio/tenor-sax/1822__simondsouza__e3.wav");
 	 	var F3 = new Key('', 'F', "audio/tenor-sax/1828__simondsouza__f3.wav");
+	 	var Gb3 = new Key('', 'Gb', "audio/tenor-sax/1832__simondsouza__gb3.wav");
+	 	var G3 = new Key('', 'G', "audio/tenor-sax/1830__simondsouza__g3.wav");
+	 	var Ab3 = new Key('', 'Ab', "audio/tenor-sax/1805__simondsouza__ab3.wav");
+	 	var A3 = new Key('', 'A', "audio/tenor-sax/1802__simondsouza__a3.wav");
+	 	var Bb3 = new Key('', 'Bb', "audio/tenor-sax/1811__simondsouza__bb3.wav");
+	 	var B3 = new Key('', 'B', "audio/tenor-sax/1808__simondsouza__b3.wav");
+	 	var C4 = new Key('', 'C', "audio/tenor-sax/1814__simondsouza__c4.wav");
+	 	var Db4 = new Key('', 'Db', "audio/tenor-sax/1817__simondsouza__d4.wav");
+	 	var D4 = new Key('', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
+	 	var Eb4 = new Key('', 'Eb', "audio/tenor-sax/1826__simondsouza__eb4.wav");
 
 	 	// Initialize an array to store Key objects
-	 	var keyObjects = [];
+	 	var activeKeyObj = [];
 
-	 	// Push each Key Object into the array
-	 	Bb1.init(keyObjects);
-	 	C2.init(keyObjects);
-	 	Db2.init(keyObjects);
-	 	D2.init(keyObjects);
-	 	Eb2.init(keyObjects);
-	 	E2.init(keyObjects);
-	 	F2.init(keyObjects);
-	 	Gb2.init(keyObjects);
-	 	G2.init(keyObjects);
-	 	Ab2.init(keyObjects);
-	 	A2.init(keyObjects);
-	 	Bb2.init(keyObjects);
-	 	B2.init(keyObjects);
-	 	C3.init(keyObjects);
-	 	Db3.init(keyObjects);
-	 	D3.init(keyObjects);
-	 	Eb3.init(keyObjects);
-	 	E3.init(keyObjects);
-	 	F3.init(keyObjects);
+	 	// Create object to assign notes to piano key elements
+	 	// Kansas City Blues Scale in Bb -> Bb, C, Dd, D, Eb, F, G, Ab, A, Bb
+	 	var keyAssign = {
+	 		'#note1' : D2,
+	 		'#note2' : Eb2,
+	 		'#note3' : F2,
+	 		'#note4' : G2,
+	 		'#note5' : Ab2,
+	 		'#note6' : A2,
+	 		'#note7' : Bb2,
+	 		'#note8' : C3,
+	 		'#note9' : Db3,
+	 		'#note10' : D3,
+	 		'#note11' : Eb3,
+	 		'#note12' : F3,
+	 		'#note13' : G3,
+	 		'#note14' : Ab3
+	 	}
+		
+		// Set the bodyID for each piano Key in the keyAssign object
+	 	for(note in keyAssign) {
+	 		keyAssign[note].bodyID = note;
+	 		// Push the active Key objects to the activeKeyObj array
+	 		activeKeyObj.push(keyAssign[note]);
+	 	}
 
 	 	// Build new Tone.js Samplers for each Key
-	 	for(var i = 0; i < keyObjects.length; i++) {
-	 		keyObjects[i].build(noteLoader);
+	 	for(var i = 0; i < activeKeyObj.length; i++) {
+	 		activeKeyObj[i].build(noteLoader);
 	 	}
 
 	 	// Set volume for each note
 	 	var relativeVolume = -10;
-	 	for(var i = 0; i < keyObjects.length; i++) {
-	 		keyObjects[i].Player.volume.value = relativeVolume;
+	 	for(var i = 0; i < activeKeyObj.length; i++) {
+	 		activeKeyObj[i].Player.volume.value = relativeVolume;
 	 	}
 
 		// Output note name for each Key object
 		var keyContainer = document.querySelector('.note-container');
-		for(var i = 0; i < keyObjects.length; i++) {
+		for(var i = 0; i < activeKeyObj.length; i++) {
 			// Only output a note name for Keys that have assigned DOM elements
-			if(keyObjects[i].bodyID.length) {
+			if(activeKeyObj[i].bodyID.length) {
 				var noteDiv = document.createElement('div');
 				noteDiv.setAttribute('class', 'note text-center');
-				noteDiv.innerHTML = '<span>' + keyObjects[i].note + '</span>';
+				noteDiv.innerHTML = '<span>' + activeKeyObj[i].note + '</span>';
 				keyContainer.appendChild(noteDiv);
 			}
 		}
@@ -182,46 +191,46 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					Bb1.play();
+					activeKeyObj[0].play();
 					break;
 				case 87:
-					C2.play();
+					activeKeyObj[1].play();
 					break;
 				case 65:
-					Db2.play();
+					activeKeyObj[2].play();
 					break;
 				case 83:
-					D2.play();
+					activeKeyObj[3].play();
 					break;
 				case 68:
-					Eb2.play();
+					activeKeyObj[4].play();
 					break;
 				case 70:
-					F2.play();
+					activeKeyObj[5].play();
 					break;
 				case 71:
-					G2.play();
+					activeKeyObj[6].play();
 					break;
 				case 72:
-					Ab2.play();
+					activeKeyObj[7].play();
 					break;
 				case 74:
-					A2.play();
+					activeKeyObj[8].play();
 					break;
 				case 75:
-					Bb2.play();
+					activeKeyObj[9].play();
 					break;
 				case 76:
-					C3.play();
+					activeKeyObj[10].play();
 					break;
 				case 186:
-					Db3.play();
+					activeKeyObj[11].play();
 					break;
 				case 219:
-					D3.play();
+					activeKeyObj[12].play();
 					break;
 				case 221:
-					Eb3.play();
+					activeKeyObj[13].play();
 					break;
 			}
 		});
@@ -232,46 +241,46 @@
 			//console.log(key);
 			switch(key) {
 				case 81:
-					Bb1.release();
+					activeKeyObj[0].release();
 					break;
 				case 87:
-					C2.release();
+					activeKeyObj[1].release();
 					break;
 				case 65:
-					Db2.release();
+					activeKeyObj[2].release();
 					break;
 				case 83:
-					D2.release();
+					activeKeyObj[3].release();
 					break;
 				case 68:
-					Eb2.release();
+					activeKeyObj[4].release();
 					break;
 				case 70:
-					F2.release();
+					activeKeyObj[5].release();
 					break;
 				case 71:
-					G2.release();
+					activeKeyObj[6].release();
 					break;
 				case 72:
-					Ab2.release();
+					activeKeyObj[7].release();
 					break;
 				case 74:
-					A2.release();
+					activeKeyObj[8].release();
 					break;
 				case 75:
-					Bb2.release();
+					activeKeyObj[9].release();
 					break;
 				case 76:
-					C3.release();
+					activeKeyObj[10].release();
 					break;
 				case 186:
-					Db3.release();
+					activeKeyObj[11].release();
 					break;
 				case 219:
-					D3.release();
+					activeKeyObj[12].release();
 					break;
 				case 221:
-					Eb3.release();
+					activeKeyObj[13].release();
 					break;
 			}
 		});
