@@ -8,12 +8,17 @@
 	 * Define piano key class
 	 */
 	class Key {
-		constructor(bodyID, note, audioFile) {
+		constructor(bodyID, note, audioFile, pitch) {
 			this.bodyID = bodyID;
 			this.note = note;
 			this.audioFile = audioFile;
 			if(bodyID) {
 				this.bodyEl = document.querySelector(this.bodyID);
+			}
+			if(pitch) {
+				this.pitch = pitch;
+			} else {
+				this.pitch = 0; // play sample as it is
 			}
 			this.active = false; // Bool to track whether key is down
 		}
@@ -30,7 +35,7 @@
 			console.log('pressed');
 			if(!this.active) {
 				this.active = true;
-				this.Player.triggerAttack();
+				this.Player.triggerAttack(this.pitch);
 				this.renderOn();
 			}
 		}
@@ -129,15 +134,22 @@
 	 	var Bb3 = new Key('', 'Bb', "audio/tenor-sax/1811__simondsouza__bb3.wav");
 	 	var B3 = new Key('', 'B', "audio/tenor-sax/1808__simondsouza__b3.wav");
 	 	var C4 = new Key('', 'C', "audio/tenor-sax/1814__simondsouza__c4.wav");
-	 	var Db4 = new Key('', 'Db', "audio/tenor-sax/1817__simondsouza__d4.wav");
+	 	var Db4 = new Key('', 'Db', "audio/tenor-sax/1820__simondsouza__db4.wav");
 	 	var D4 = new Key('', 'D', "audio/tenor-sax/1816__simondsouza__d3.wav");
 	 	var Eb4 = new Key('', 'Eb', "audio/tenor-sax/1826__simondsouza__eb4.wav");
+	 	var E4 = new Key('', 'E', "audio/tenor-sax/1826__simondsouza__eb4.wav", 1);
+	 	var F4 = new Key('', 'F', "audio/tenor-sax/1826__simondsouza__eb4.wav", 2);
+	 	var Gb4 = new Key('', 'Gb', "audio/tenor-sax/1826__simondsouza__eb4.wav", 3);
+	 	var G4 = new Key('', 'G', "audio/tenor-sax/1826__simondsouza__eb4.wav", 4);
+	 	var Ab4 = new Key('', 'Ab', "audio/tenor-sax/1826__simondsouza__eb4.wav", 5);
+	 	var A4 = new Key('', 'A', "audio/tenor-sax/1826__simondsouza__eb4.wav", 6);
+	 	var Bb4 = new Key('', 'Bb', "audio/tenor-sax/1826__simondsouza__eb4.wav", 7);
+
 
 	 	// Initialize an array to store Key objects
 	 	var activeKeyObj = [];
 
 	 	// Create object to assign notes to piano key elements
-	 	// Kansas City Blues Scale in Bb -> Bb, C, Dd, D, Eb, F, G, Ab, A, Bb
 	 	var keyAssign = {
 	 		'#note1' : D2,
 	 		'#note2' : Eb2,
@@ -154,12 +166,30 @@
 	 		'#note13' : G3,
 	 		'#note14' : Ab3
 	 	}
-		
+
+	 	// Kansas City Blues scale as outlined by Detroit Chamber
+	 	var kansasCityBlues = {
+	 		'#note1' : Db2,
+	 		'#note2' : D2,
+	 		'#note3' : F2,
+	 		'#note4' : G2,
+	 		'#note5' : Bb2,
+	 		'#note6' : C3,
+	 		'#note7' : Db3,
+	 		'#note8' : F3,
+	 		'#note9' : G3,
+	 		'#note10' : Bb3,
+	 		'#note11' : C4,
+	 		'#note12' : Db4,
+	 		'#note13' : F4,
+	 		'#note14' : G4		
+	 	};
+
 		// Set the bodyID for each piano Key in the keyAssign object
-	 	for(note in keyAssign) {
-	 		keyAssign[note].bodyID = note;
+	 	for(note in kansasCityBlues) {
+	 		kansasCityBlues[note].bodyID = note;
 	 		// Push the active Key objects to the activeKeyObj array
-	 		activeKeyObj.push(keyAssign[note]);
+	 		activeKeyObj.push(kansasCityBlues[note]);
 	 	}
 
 	 	// Build new Tone.js Samplers for each Key

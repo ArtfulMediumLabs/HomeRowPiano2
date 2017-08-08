@@ -10,6 +10,13 @@
 	margin-top: 100px;
 }
 
+/* Site logo */
+.site-logo {
+	width: 300px;
+	display: block;
+	margin: 15px auto;
+}
+
 /* Piano keys */
 .piano-container {
 	margin-top: 65px;
