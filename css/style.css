@@ -4,7 +4,7 @@
 
 /* General */
 .pull-up {
-	margin-top: -50px;
+	margin-top: -40px;
 }
 .spacer {
 	margin-top: 100px;
@@ -24,8 +24,8 @@
 .piano-key-white,
 .piano-key-black {
 	position: relative;
-	width: 4.5%;
-	height: 54px;
+	width: 4%;
+	height: 47px;
 	font-size: 16px;
 	font-weight: bold;
 	margin-left: 1.25%;
@@ -57,8 +57,8 @@
 }
 .note {
 	position: relative;
-	width: 4.5%;
-	height: 54px;
+	width: 4%;
+	height: 47px;
 	font-size: 16px;
 	font-weight: bold;
 	margin-left: 1.25%;

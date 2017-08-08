@@ -164,7 +164,8 @@
 	 		'#note11' : Eb3,
 	 		'#note12' : F3,
 	 		'#note13' : G3,
-	 		'#note14' : Ab3
+	 		'#note14' : Ab3,
+	 		'#note15' : A3
 	 	}
 
 	 	// Kansas City Blues scale as outlined by Detroit Chamber
@@ -182,7 +183,8 @@
 	 		'#note11' : C4,
 	 		'#note12' : Db4,
 	 		'#note13' : F4,
-	 		'#note14' : G4		
+	 		'#note14' : G4,
+	 		'#note15' : Bb4		
 	 	};
 
 		// Set the bodyID for each piano Key in the keyAssign object
@@ -218,7 +220,7 @@
 		// Listen for key presses and determine which note to play
 		window.addEventListener('keydown', function(e) {
 			var key = e.keyCode;
-			//console.log(key);
+			console.log(key);
 			switch(key) {
 				case 81:
 					activeKeyObj[0].play();
@@ -256,11 +258,14 @@
 				case 186:
 					activeKeyObj[11].play();
 					break;
-				case 219:
+				case 222:
 					activeKeyObj[12].play();
 					break;
-				case 221:
+				case 219:
 					activeKeyObj[13].play();
+					break;
+				case 221:
+					activeKeyObj[14].play();
 					break;
 			}
 		});
@@ -306,11 +311,14 @@
 				case 186:
 					activeKeyObj[11].release();
 					break;
-				case 219:
+				case 222:
 					activeKeyObj[12].release();
 					break;
-				case 221:
+				case 219:
 					activeKeyObj[13].release();
+					break;
+				case 221:
+					activeKeyObj[14].release();
 					break;
 			}
 		});
